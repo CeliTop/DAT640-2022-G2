@@ -1,6 +1,6 @@
 # DAT640 Project
 ## Group 2 - TREC 2019 passage reranking
-##### Brenne Geoffrey - Paul Duffaut - Célian DEBETHUNE
+##### Brenne Geoffrey - Paul Duffaut - Célian Debéthune
 
 Here is the group project carried out for the DAT640 subject taught at the University of Stavanger.
 We chose the TREC-2019 passage reranking project and developed our project in python using Juptyter-Notebook.
