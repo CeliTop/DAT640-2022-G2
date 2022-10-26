@@ -7,9 +7,10 @@ We chose the TREC-2019 passage reranking project and developed our project in py
 We then wrote our own code to make it presentable and to show how to get our results.
 
 The python modules used are:
-- pyterrier
-- pandas
-- trectools
+- pyterrier (to et indexed documents and BM25)
+- pandas    (to use data-frames)
+- trectools (to evaluate)
+- nltk      (for pre-process)
 
 ## Features
 
