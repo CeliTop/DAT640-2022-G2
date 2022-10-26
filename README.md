@@ -1,5 +1,5 @@
 # DAT640-2022-G2
-## Group 2 - TREC 2019 passage reranking
+### Group 2 - TREC 2019 passage reranking
 ##### Brenne Geoffrey - Paul Duffaut - Célian DEBETHUNE
 
 Here is the group project carried out for the DAT640 subject taught at the University of Stavanger.
