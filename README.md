@@ -1,6 +1,6 @@
 # DAT640 Project
 ## Group 2 - TREC 2019 passage reranking
-##### Brenne Geoffrey - Paul Duffaut - Célian Debéthune
+##### Geoffrey Brenne - Paul Duffaut - Célian Debéthune
 
 Here is the group project carried out for the DAT640 subject taught at the University of Stavanger.
 We chose the TREC-2019 passage reranking project and developed our project in python using Juptyter-Notebook.
@@ -48,7 +48,8 @@ python3 BM_25_retrieval.py
 ```sh
 python3 BM_25_pyterrier.py
 ```
-The results are very similar the same passages are retrieved, sometimes order changes a bit when BM-25 scores are very close.
+Since the first BM-25 implementation is very slow, we use it to rank one query at a time, and the second one is ranking the whole test dataset.
+The results are very similar, the same passages are retrieved, sometimes order changes a bit when BM-25 scores are very close.
 
 Then you can use `evaluate.py` and the text files to obtain performances results of the retrieval model:
 ```sh
