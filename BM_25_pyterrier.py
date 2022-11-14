@@ -4,32 +4,34 @@
 # for the next parts of the project
 
 import pyterrier as pt
-import pandas as pd
 import gzip
 import shutil
 import os as os
+from pyterrier.measures import *
+import pandas as pd
 
 # Init pyterrier
 pt.init()
 
 # Get MS Marco passages used in TREC-2019
 dataset = pt.get_dataset("trec-deep-learning-passages")
-
+print(dataset)
 # Get corpus
 pathCorpus = dataset.get_corpus()
+print(pathCorpus)
 
 # Get the index stemmed (Porter stemmer)
 path = dataset.get_index("terrier_stemmed")
 index = pt.IndexFactory.of(path)
 
 # Get the queries
-queries = dataset.get_topics("test-2019")
+queries = dataset.get_topics("test-2020")
 print("query examples")
 print(queries)
 print()
 
 # Get the qrels
-qrels = dataset.get_qrels("test-2019")
+qrels = dataset.get_qrels("test-2020")
 print("qrel examples:")
 print(qrels)
 print()
@@ -38,23 +40,25 @@ print()
 bm25 = pt.BatchRetrieve(index, wmodel="BM25")
 
 # Run BM-25 on the whole test dataset
-pt.Experiment(
+results = pt.Experiment(
     [bm25],
     queries,
     qrels,
-    eval_metrics=["map", "recip_rank", "ndcg"],
+    eval_metrics=["map", "recip_rank", "ndcg", "recall"],
     save_dir="./",
     save_mode="overwrite",
     dataframe=True,
 )
+print(results)
 
 # Run BM-25 on a subset of queries
-queries_uni = queries.loc[queries["qid"] == str(156493)]
+queries_uni = queries.loc[queries["qid"] == str(1037496)]
+print(queries_uni)
 pt.Experiment(
     [bm25],
     queries_uni,
     qrels,
-    eval_metrics=["map", "recip_rank", "ndcg"],
+    eval_metrics=["map", "recip_rank", "ndcg", "recall"],
     perquery=True,
     dataframe=True,
 )
@@ -79,3 +83,5 @@ with gzip.open("BR(BM25).res.gz", "rb") as f_in:
     with open("retrieved.txt", "wb") as f_out:
         shutil.copyfileobj(f_in, f_out)
 os.remove("BR(BM25).res.gz")
+
+print("The ranking is generated !")
