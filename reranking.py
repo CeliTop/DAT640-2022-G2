@@ -3,7 +3,7 @@ import pyterrier as pt
 import pandas as pd
 
 PATH_TO_TOP_1000 = "retrieved.txt"
-OUTPUT_PATH = "x.txt"
+OUTPUT_PATH = "reranked.txt"
 
 # Init
 pd.set_option("display.max_rows", None)
