@@ -10,6 +10,7 @@ The python modules used are:
 - [pyterrier](https://github.com/terrier-org/pyterrier)
 - pandas
 - [trectools][trec_tools_link]
+- [sentence_transformers][transformers_link]
 
 ## Features
 
@@ -18,7 +19,8 @@ The python modules used are:
 
 ## How tu use it
 
-There is two files for performing BM-25 retrieval:
+##### Baseline Method
+There are two files for performing BM-25 retrieval:
 Both of them outputs `retrieved.txt` and `qrels.txt`: 
 
 "retrieved.txt": The top 1000 passages ranked using BM-25 in TREC format: `BM_25_retrieval.py` and `BM_25_pyterrier.py`
@@ -51,13 +53,21 @@ python3 BM_25_pyterrier.py
 Since the first BM-25 implementation is very slow, we use it to rank one query at a time, and the second one is ranking the whole test dataset.
 The results are very similar, the same passages are retrieved, sometimes order changes a bit when BM-25 scores are very close.
 
-Then you can use `evaluate.py` and the text files to obtain performances results of the retrieval model:
+Then you can use `trec_eval` and the text files to obtain performances results of the baseline method:
 ```sh
-python3 evaluate.py
+./trec_eval ./qrels.txt ./retrieved.txt
 ```
-or
+
+##### Advanced Method
+
+After performing the first ranking, you can use `reranking.py` to apply a reranking thanks to a BERT model:
 ```sh
-python3 evaluate.py ./TREC_FORMATTED_RETRIEVAL_FILE ./QREL_FORMATTED_FILE
+python3 reranking.py
+```
+
+This will output a file called `reranked.txt` in the same format as retrieved.txt. You can then perform a second evaluation with: 
+```sh
+./trec_eval ./qrels.txt ./reranked.txt
 ```
 
 ## Installation
@@ -65,3 +75,4 @@ Some packages are used, but the installation is straightforward.
 
 [//]: # (Everythin after this will be hide)
    [trec_tools_link]: <https://github.com/joaopalotti/trectools>
+   [transformers_link]: <https://www.sbert.net/>
